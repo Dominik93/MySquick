@@ -1,0 +1,14 @@
+<link href="css/posts.css" rel="stylesheet" type="text/css"/>
+<div id="editor_layer">
+    <script>$("#editor_layer").load("editor.html");</script>
+</div>
+<div class="content_header"><p>Dodaj post</p></div>
+<div id="add_post_form">
+    <input type="text" id="form_title" class="post_add_field" placeholder="Title"/>
+    <button onclick="sendArticleTitle('form_title');" id="add">+</button>
+</div>
+<div class="content_header"><p>Posty</p></div>
+<div id="post_table">
+    <script>$("#post_table").load("./php/PostTable.php");</script>
+</div>
+<span id="polandInspace"></span>

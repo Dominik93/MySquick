@@ -1,0 +1,51 @@
+*{
+    padding: 0px;
+}
+*::-webkit-input-placeholder {
+    color: cornflowerblue;
+}
+*:-moz-placeholder {
+    /* FF 4-18 */
+    color: cornflowerblue;
+}
+*::-moz-placeholder {
+    /* FF 19+ */
+    color: cornflowerblue;
+}
+*:-ms-input-placeholder {
+    /* IE 10+ */
+    color: cornflowerblue;
+}
+body{
+    background: whitesmoke;
+    height: 100%;
+}
+input[type="text"], input[type="password"], input[type="email"], select{
+    float:left;
+    font-size: 15px;
+    height: 20px;
+    border: none;
+}
+@font-face{
+    font-family: 'Headfont';
+    src: url(../fonts/Gloria.woff);
+}
+#main_header{
+    display: block;
+    padding-left: 8px;
+    height: 60px;
+    float: left;
+    font-family: 'Headfont';
+    font-weight: bold;
+    font-size: 25px;
+    color: cornflowerblue;
+}
+.content_header{
+    height: 20px;
+    width: 285px;
+    padding-top: 0px;
+    padding-left: 15px;
+    background: cornflowerblue;
+    font-family: Calibri;
+    font-size: 15px;
+}

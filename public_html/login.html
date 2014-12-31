@@ -1,0 +1,11 @@
+<link rel="stylesheet" type="text/css" href="css/login.css">
+<div id="login">
+    <header id="main_header"><p>SquickCMS</p></header>
+    <div id="form_container">
+        <input type="text" id="form_login" onkeyup="logValid('form_login', 'form_password', 'form_btn')" placeholder="Login"/>
+        <input type="password" id="form_password" onkeyup="logValid('form_login', 'form_password', 'form_btn')" placeholder="Hasło"/>
+        <button onclick="if(notEmpty('form_login', 'form_password')) sendLogInfo('form_login', 'form_password')" id="form_btn" title="Jeżeli chcesz się zalogować podaj swój login oraz hasło.">&gt;</button>
+    </div>
+    <div id="reminder"><p>Przypomnij mi hasło, proszę!</p></div>
+    <div id="annotation"></div>
+</div>

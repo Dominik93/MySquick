@@ -1,0 +1,9 @@
+<div id="edit_content">
+    <input type="text" id="form_title_in_editor" class="post_add_field" placeholder="Title"/>
+    <textarea name="editor" id="editor" rows="10" cols="80"></textarea>
+    <script>
+            CKEDITOR.replace( 'editor' );
+            CKEDITOR.config.title=false;
+    </script>
+    <button onclick="sendArticle('form_title_in_editor', 'editor')" id="edit">Wyślij artykuł</button>
+</div>

@@ -1,0 +1,40 @@
+body{
+    width: 800px;
+    margin: auto;
+}
+header{
+    width: 800px;
+    height: 200px;
+    background: blue;
+}
+nav{
+    width: 800px;
+    height: 30px;
+    background:blueviolet;
+}
+nav div{
+    float: left;
+    width: 200px;
+    height: 30px;
+    cursor: pointer;
+}
+nav div:hover{
+    background-color: bisque;
+}
+#content, #sidebar2{
+    float: left;
+    min-height: 600px;
+}
+#sidebar2{
+    width: 300px;
+    background: cornflowerblue;
+}
+#content{
+    width: 500px;
+    background: pink;
+}
+footer{
+    width: 800px;
+    height: 30px;
+    background: yellow;
+}

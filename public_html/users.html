@@ -1,0 +1,24 @@
+<link href="css/users.css" rel="stylesheet" type="text/css"/>
+<script src="js/sendUserInfo.js" type="text/javascript"></script>
+
+<div class="content_header"><p>Dodaj użytkownika</p></div>
+<div id="add_user_form">
+    <input type="text" id="form_login" class="user_add_field" placeholder="Login"/>
+    <input type="email" id="form_email" class="user_add_field" placeholder="Email"/>
+    <input type="password" id="form_password" class="user_add_field" placeholder="Hasło"/>
+    <input type="password" id="form_rpt_password" class="user_add_field" placeholder="Powtórz hasło"/>
+    <span id="rank_s"></span>
+    <script>$("#rank_s").load("./php/GetRanks.php");</script>
+    <button onclick="sendUserInfo('form_login', 'form_password', 'form_rpt_password', 'form_email', 'rank_selector')" id="add">+</button>
+    <span id="added"></span>
+</div>
+
+<div class="content_header"><p>Lista użytkowników</p></div>
+<div id="user_table">
+    <script>$("#user_table").load("./php/UserTable.php");</script>
+</div>
+
+<div class="content_header"><p>Rangi i prawa</p></div>
+<div id="privilage_table">
+    <script>$("#privilage_table").load("./php/PrivilTable.php");</script>
+</div>

@@ -1,0 +1,30 @@
+<link href="css/galleries.css" rel="stylesheet" type="text/css"/>
+<script>$(document).ready(function(){
+    stopSubmitPhoto();
+});</script>
+<div id="photos_layer">
+    <!-- LOADING PHOTOS ZALEŻNE OD PARAMETRU GALLERIES (FUNKCJA JS) -->
+</div>
+<div class="content_header"><p>Dodaj zdjęcie</p></div>
+<div id="add_photo_form">
+    <div id="photo_hint">Plik musi mieć rozszerzenie JPG, JPEG lub GIF oraz być mniejszy niż 5MB.</div>
+    <form action="php/AddPhoto.php" method="post" enctype="multipart/form-data" id="upload_photo_form">
+        <input name="FileInput" id="FileInput" type="file" /><br/>
+        <input name="name" id="form_name" type="text" placeholder="Nazwa zdjęcia"/>
+        <input name="author" id="form_author" type="text" placeholder="Autor zdjęcia"/>
+        <input type="submit"  id="add" value="+" />
+    </form>
+    <progress value="0" max="100"></progress>
+<button id="show_photos" onclick="showPhotos(-1)">Pokaż wszystkie zdjęcia</button>
+</div>
+
+<div class="content_header"><p>Dodaj galerię</p></div>
+<div id="add_gallery_form">
+    <input type="text" id="form_gallery" placeholder="Nazwa galerii"/>
+    <button onclick="sendGallery('form_gallery');" id="add_gallery">+</button>
+</div>
+
+<div class="content_header"><p>Galerie</p></div>
+<div id="galleries_table">
+    <script>$("#galleries_table").load("./php/GalleriesTable.php");</script>
+</div>

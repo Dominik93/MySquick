@@ -1,0 +1,131 @@
+#photos_layer{
+    position: absolute;
+    display: none;
+    top:-10px;
+    width: calc(100% - 151px);
+    min-height: calc(100% + 9px);
+    background-color: rgba(0, 0, 0, 0.5);
+}
+#add_photo_form, #add_gallery_form{
+    width: 790px;
+    margin: 10px 0px 0px 20px;
+    min-height: 30px;
+}
+#add, #add_gallery{
+    float: left;
+    border: none;
+    background: cornflowerblue;
+    cursor: pointer;
+    font-family: monospace;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    margin-left: 5px;
+    margin-top: 3px;
+}
+#form_author, #form_name, #form_gallery{
+    margin-top: 3px;
+}
+#form_name{
+    border-right: 1px dotted darkgray !important;
+}
+progress{
+    margin-left: 370px;
+    margin-top: 3px;
+    display: block;
+}
+#show_photos, .delete_photo_button, #close{
+    margin-top: 15px;
+    margin-left: -356px;
+    border: none;
+    background: cornflowerblue;
+    cursor: pointer;
+    color: white;
+    padding: 3px;
+    font-weight: bold;
+    width: 356px;
+}
+#photos{
+    margin-top: 30px;
+}
+.photo_container{
+    background: whitesmoke;
+    width: 200px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    margin: 20px;
+    display: inline-table;
+}
+.photo_name{
+    text-align: center;
+    color: darkslategrey;
+    font-family: Calibri;
+    font-size: 14px;
+    font-weight: bold;
+}
+.photo_author{
+    font-style: italic;
+    font-size: 9px;
+    font-family: cursive;
+}
+.photo_author span{
+    float: right;
+}
+.delete_photo_button{
+    width: 200px;
+    margin: auto !important;
+    text-align: center;
+}
+#close{
+    width: 100%;
+    height: 20px;
+    position: fixed;
+    margin: auto !important;
+    text-align: center;
+    padding-top: 10px;
+}
+#galleries_table{
+    margin: 10px 0px 30px 20px;
+}
+#t_galleries th{
+    background-color: #555555;   
+    color: #ffffff;
+    padding: 3px;
+    text-align: center;
+    vertical-align: top;
+    font-family: Verdana;
+    font-size: 12px;
+}
+#t_galleries th:not(:first-child){
+    border-left: 1px dashed whitesmoke; 
+}
+#t_galleries tr:nth-child(2n){
+    background-color: #ffffff;
+}
+#t_galleries td{
+    padding: 7px 5px;
+    font-size: 14px;
+    width: 100px;
+    vertical-align: top;
+    border-collapse: collapse !important;
+}
+#t_galleries .id{
+    display: none;
+}
+.edit_gallery_button, .delete_gallery_button{
+    width: 30px !important;
+    background-position: center center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+.edit_gallery_button{
+    background-image: url('../img/icons/edit.png');
+}
+.delete_gallery_button{
+    background-image: url('../img/icons/delete.png');
+}
+.edit_gallery_button:hover, .delete_gallery_button:hover{
+    box-shadow: inset 0 80px rgba(0, 0, 0, 0.2);
+    transition: all 0.5s linear;
+}

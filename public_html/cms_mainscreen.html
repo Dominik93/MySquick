@@ -1,0 +1,29 @@
+<link href="css/cms_mainscreen.css" rel="stylesheet" type="text/css"/>
+<nav>
+    <header id="main_header">SquickCMS</header>
+    <div id="panel">
+        Witaj <span id="user_name"><script>$("#user_name").load("./php/Panel.php");</script></span>
+        <button id="logout" onclick="$('#container').load('./php/LogOut.php')">Wyloguj</button>
+    </div>
+    <a href="#info" id="info"><p>Informacje o systemie</p></a>
+    <a href="#users" id="users"><p>Użytkownicy i ich prawa</p></a>
+    <a href="#posts" id="posts"><p>Zarządzanie postami</p></a>
+    <a href="#galleries" id="galleries"><p>Galerie oraz zdjęcia</p></a>
+    <a href="#layouts" id="layouts"><p>Zarządzanie szablonami</p></a>
+    <a href="#settings" id="settings"><p>Ustawienia systemu</p></a>
+</nav>
+<article id="content">
+</article>
+<script>
+    var start_hash=window.location.hash;
+    var actual_hash;
+    if(start_hash.length === 0) actual_hash="#info";
+    else actual_hash=window.location.hash;
+    $("#content").load(actual_hash.substring(1)+".html");
+    setInterval('\
+    actual_hash=window.location.hash;\n\
+    if(start_hash!==actual_hash){\n\
+        $("#content").load(actual_hash.substring(1)+".html");\n\
+        start_hash=actual_hash;\n\
+    }', 500);
+</script>

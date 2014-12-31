@@ -1,0 +1,7 @@
+<Files ~ \.(php|php5|php6|phps|inc|shtml)$>
+SetHandler fcgid-script
+    FcgidWrapper "/fcgi/virt101443/public_html/fcgid-5.5.sh" .php
+    
+Options +ExecCGI
+    allow from all
+</Files>
