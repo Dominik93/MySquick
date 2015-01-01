@@ -36,13 +36,11 @@
     </head>
     <body>
         <div id='layer'></div>
-        <div id="container">
-            <script>
-                if(window.location.hash==="#admin") $("#container").load('./login.html');
-                else if($.cookie('squick_cmsSession')) $("#container").load('./cms_mainscreen.html');
-                else $("#container").load('./php/GetTemplateInfo.php');
-            </script>
-            
-        </div>
+        <div id="container"></div>
+        <script>
+            if(window.location.hash==="#admin") $("#container").load('./login.html');
+            else if($.cookie('squick_cmsSession')) $("#container").load('./cms_mainscreen.html');
+            else $("#container").load('./php/GetTemplateInfo.php');
+        </script>
     </body>
 </html>
