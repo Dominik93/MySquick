@@ -11,4 +11,4 @@
 </nav>
 <article id="content"></article>
 <div id="sidebar2"></div>
-<footer></footer>
+<footer id="footer"></footer>

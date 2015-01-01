@@ -8,7 +8,7 @@
         echo "<table id='t_ranks' border='0' cellpading='0' cellspacing='0'><tr><th>Ranga</th>";
         $i=2;
         $record = mysqli_fetch_array($mysql_get_rank);
-        while($i<10){
+        while($i<8){
             echo "<th>".array_keys($record)[($i*2+1)]."</th>";
             $i++;
         }
@@ -17,7 +17,7 @@
         while($record = mysqli_fetch_array($mysql_get_rank)){
             $i=2;
             echo "<tr class='privilage_row".$i."'><td class='rank'>".$record["Name"]."</td>";
-            while($i<10){
+            while($i<8){
                 if($connector->checkEdit($id, "Privilages")){
                     echo "<td class=".array_keys($record)[($i*2+1)].">";
                     if($record[$i][0]==1) echo "<input type='checkbox' onclick='changePrivilages(".$record['ID'].", \"".array_keys($record)[($i*2+1)]."\", 0)' checked/>Widok<br/>";
