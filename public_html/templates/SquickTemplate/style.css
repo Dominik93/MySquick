@@ -4,15 +4,17 @@ body{
 }
 header{
     width: 800px;
-    height: 200px;
-    background: blue;
+    height: 133px;
+}
+header img{
+    width: 800px;
 }
 nav{
     width: 800px;
     height: 30px;
     background:blueviolet;
 }
-nav div{
+nav div, .componentArticlesLink{
     float: left;
     width: 200px;
     height: 30px;
@@ -33,7 +35,7 @@ nav div:hover{
     width: 500px;
     background: pink;
 }
-footer{
+#footer{
     width: 800px;
     height: 30px;
     background: yellow;

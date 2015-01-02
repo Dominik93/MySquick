@@ -1,0 +1,17 @@
+<link href="css/templates.css" rel="stylesheet" type="text/css"/>
+<script>$(document).ready(function(){
+    stopSubmitTemplate();
+});</script>
+<div id="templates_layer">
+    <!-- LOADING TEMPLATES ZALEŻNE OD PARAMETRU TEMPLATE (FUNKCJA JS) -->
+</div>
+<div class="content_header"><p>Dodaj szablon</p></div>
+<div id="add_template_form">
+    <div id="template_hint">Plik musi mieć rozszerzenie ZIP oraz być mniejszy niż 5MB.</div>
+    <form action="php/AddTemplate.php" method="post" enctype="multipart/form-data" id="upload_template_form">
+        <input name="FileInput" id="FileInput" type="file" /><br/>
+        <input name="name" id="form_name" type="text" placeholder="Nazwa szablonu"/>
+        <input type="submit"  id="add" value="+" />
+    </form>
+    <progress value="0" max="100"></progress>
+</div>

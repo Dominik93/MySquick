@@ -1,0 +1,33 @@
+#template_layer{
+    position: absolute;
+    display: none;
+    top:-10px;
+    width: calc(100% - 151px);
+    min-height: calc(100% + 9px);
+    background-color: rgba(0, 0, 0, 0.5);
+}
+#add_template_form{
+    width: 790px;
+    margin: 10px 0px 0px 20px;
+    min-height: 30px;
+}
+#add{
+    float: left;
+    border: none;
+    background: cornflowerblue;
+    cursor: pointer;
+    font-family: monospace;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    margin-left: 5px;
+    margin-top: 3px;
+}
+#form_name{
+    margin-top: 3px;
+}
+progress{
+    margin-left: 210px;
+    margin-top: 3px;
+    display: block;
+}

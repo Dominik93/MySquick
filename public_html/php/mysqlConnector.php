@@ -516,7 +516,7 @@
             }
         }
         
-        //Zapytania - GALERIA
+        //Zapytania - GALLERY
         public function galleryAmount($title){ //count() nie chciało działać, nie wiem czemu
             $i=0;
             $query="SELECT * FROM Galleries";
@@ -611,6 +611,122 @@
             else{
                 return 0;
             }
+        }
+        
+        //Zapytania - TEMPLATES
+        public function zipExtractor($path, $name){
+            $zip=new ZipArchive();
+            $destinationFolder=substr(getcwd(),0, strlen(getcwd())-3).'/templates/'.substr($name, 0, strlen($name)-4);
+            $zipPath=substr(getcwd(),0, strlen(getcwd())-3).'/templates/temp/'.$name;
+            if($zip->open($zipPath)){
+                if(is_dir($destinationFolder)){
+                    mkdir($destinationFolder);
+                }
+                $zip->extractTo($destinationFolder);
+                unlink($zipPath);
+                $zip->close();
+                return $destinationFolder;
+            }
+            else return 0;
+        }
+        public function checkZipContent($UploadDirectory, $File_Name){
+                $zip=zip_open($UploadDirectory.$File_Name);
+                if($zip){
+                    while($zip_entry = zip_read($zip)){
+                        if(zip_entry_name($zip_entry)=="areas_table.cnf"){
+                            if(zip_entry_open($zip, $zip_entry)){
+                                $content = zip_entry_read($zip_entry);
+                                if(strpos($content, "#content") && strpos($content, "#footer")){
+                                    return $this->zipExtractor($UploadDirectory, $File_Name);
+                                }
+                                else{
+                                    return 0;
+                                }
+                            }
+                            else{
+                                return 0;
+                            }
+                        }
+                        else{
+                            return 0;
+                        }
+                    }
+                }
+                else{
+                    return 0;
+                }
+        }
+        public function uploadTemplateOnServer($File_Name){
+            if(isset($_FILES["FileInput"]) && $_FILES["FileInput"]["error"]== UPLOAD_ERR_OK){
+                if (!isset($_SERVER['HTTP_X_REQUESTED_WITH'])) die();
+                if ($_FILES["FileInput"]["size"] > 5242880) die("File size is too big!");
+                switch(strtolower($_FILES['FileInput']['type'])){
+                    case 'application/zip':
+                        break;
+                    default:
+                        die('Unsupported File!'); 
+                }
+            }
+            $UploadDirectory    = substr(getcwd(),0, strlen(getcwd())-3).'/templates/temp/';
+            $File_Ext           = substr($_FILES['FileInput']['type'], strrpos($_FILES['FileInput']['type'], '/')+1); //get file extention
+            $Random_Number      = rand(0, 9999999999); //Random number to be added to name.
+            $NewFileName        = $File_Name.$Random_Number.".".$File_Ext; //new file name
+            if(move_uploaded_file($_FILES['FileInput']['tmp_name'], $UploadDirectory.$NewFileName )){
+                return $this->checkZipContent($UploadDirectory, $NewFileName);
+                
+            }
+            else die('error uploading File!');
+        }
+        public function getAreasTable($path){
+            $table_file=fopen($path."/areas_table.cnf", "r");
+            $i=0;
+            $areas_table=[];
+            while($line=trim(fgets($table_file))){
+                $areas_table[$i]=substr($line, 1);
+                $i++;
+            }
+            return $areas_table;
+        }
+        public function addTemplateAreas($templateId, $path){
+            $areas=$this->getAreasTable($path);
+            $this->begin();
+            for($i=0; $i<count($areas); $i++){
+                $query="INSERT INTO Predefined_Areas SET Area_Name='".$areas[$i]."', ID_Template='".$templateId."';";
+                $add_area=mysqli_query($this->res, $query);
+            }
+            if(!$add_area){
+                $this->rollback();
+                return 0;
+            }
+            else{
+                $this->commit();
+                return 1;
+            }
+        }
+        public function addTemplate($name){
+            $sessionNumber=filter_input(INPUT_COOKIE, 'squick_cmsSession', FILTER_SANITIZE_MAGIC_QUOTES);
+            $id=$this->selectUserIDBySession($sessionNumber);
+            if($this->checkAdd($id, "Templates")){
+                $pathToTemplate=$this->uploadTemplateOnServer($name);
+                if($pathToTemplate!="0"){
+                    $now=date('Y-m-d G:i:s');
+                    $query="INSERT INTO Templates SET Name='".$name."', Add_Date='".$now."', ID_Creator='".$id."', Path='".$pathToTemplate."', At_Use='0';";
+                    $this->begin();
+                    $add_tem=mysqli_query($this->res, $query);
+                    if(!$add_tem){
+                        $this->rollback();
+                        return 0;
+                    }
+                    else{
+                        $this->commit();
+                        $select="SELECT * FROM Templates WHERE Path='".$pathToTemplate."';";
+                        $get_template_id=mysqli_fetch_array(mysqli_query($this->res, $select))["ID"];
+                        return $this->addTemplateAreas($get_template_id, $pathToTemplate);
+                    }
+                }
+                else return 0;
+            }
+            else return 0;
         }
     }
     $connector=new mysqlConnector();

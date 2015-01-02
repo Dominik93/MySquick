@@ -5,14 +5,13 @@
     $query = "SELECT *"
             . "FROM Predefined_Areas JOIN Components ON Predefined_Areas.ID_Component=Components.ID";
     $mysqli_get_components = mysqli_query($connector->res, $query);
-    echo "<script>";
     while($record = mysqli_fetch_array($mysqli_get_components)){
         if($record["ID_Template"]==$id){
-            echo '$("#'.$record['Area_Name'].'").load("./php/'.$record['Component_File'].'", {'
+            echo '<script>$("#'.$record['Area_Name'].'").load("./php/'.$record['Component_File'].'", {'
+                . 'name : "'.$record['Name'].'",'
                 . 'params: "'.$record['Parameters'].'"'
-                . '});';
+                . '});</script>';
         }
     }
-    echo "</script>";
     echo "<a href='index.html#admin'>Przejdź do panelu admina</a>"
 ?>
