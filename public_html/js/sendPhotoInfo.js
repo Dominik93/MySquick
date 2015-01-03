@@ -30,7 +30,6 @@ function OnProgress(event, position, total, percentComplete)
 }
 function afterSuccess(){
     alert('Wysłano');
-    $('progress').attr("value", "0");
 }
 function stopSubmitPhoto(){
     var options = {
@@ -49,7 +48,9 @@ function stopSubmitPhoto(){
             alert("Wszystkie pola muszą być wypełnione"); 
             return false;
         }
-        $(this).ajaxSubmit(options);           
+        $.when($(this).ajaxSubmit(options)).then(function(){
+            $('progress').attr("value", "0"); 
+        });                 
         return false;
     });
 }

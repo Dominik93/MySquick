@@ -16,3 +16,19 @@ function sendUserInfo(login, password, rpt_password, email, rank){
     }
     else alert("Podane hasła nie są identyczne");
 }
+function sendEditInfo(rowId){
+    var editID=$("#t_users .user_row"+rowId+" .id").html();
+    var login=$("#t_users .user_row"+rowId+" .login input").val();
+    var display=$("#t_users .user_row"+rowId+" .display input").val();
+    var email=$("#t_users .user_row"+rowId+" .email input").val();
+    var rank=$("#t_users .user_row"+rowId+" .rank #rank_selector").val();
+    $("#added").load("./php/EditUser.php",{
+                id: editID,
+                login: login,
+                display: display,
+                email: email,
+                rank: rank
+    }, function(){
+        $("#user_table").load("./php/UserTable.php");
+    });
+}

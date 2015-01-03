@@ -4,11 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/giny21/Documents/GitHub/MySquick/public_html/php/GetTemplateInfo.php</file>
-            <file>file:/C:/Users/giny21/Documents/GitHub/MySquick/public_html/php/GetComponentsInfo.php</file>
-            <file>file:/C:/Users/giny21/Documents/GitHub/MySquick/public_html/php/ShowArticle.php</file>
             <file>file:/C:/Users/giny21/Documents/GitHub/MySquick/public_html/php/ArticleComponentFillContent.php</file>
+            <file>file:/C:/Users/giny21/Documents/GitHub/MySquick/public_html/templates/SquickTemplate/index.php</file>
+            <file>file:/C:/Users/giny21/Documents/GitHub/MySquick/public_html/index.html</file>
             <file>file:/C:/Users/giny21/Documents/GitHub/MySquick/public_html/php/ArticleComponent.php</file>
-            <file>file:/C:/Users/giny21/Documents/GitHub/MySquick/public_html/templates/SquickTemplate/style.css</file>
+            <file>file:/C:/Users/giny21/Documents/GitHub/MySquick/public_html/js/sendAreaInfo.js</file>
+            <file>file:/C:/Users/giny21/Documents/GitHub/MySquick/public_html/php/EditAreas.php</file>
         </group>
     </open-files>
 </project-private>

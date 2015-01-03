@@ -614,6 +614,15 @@
         }
         
         //Zapytania - TEMPLATES
+        public function templatesAmount(){ //count() nie chciało działać, nie wiem czemu
+            $i=0;
+            $query="SELECT * FROM Templates";
+            $get_gall=mysqli_query($this->res, $query);
+            while($record=mysqli_fetch_array($get_gall)){
+                $i++;
+            }
+            return $i;
+        }
         public function zipExtractor($path, $name){
             $zip=new ZipArchive();
             $destinationFolder=substr(getcwd(),0, strlen(getcwd())-3).'/templates/'.substr($name, 0, strlen($name)-4);
@@ -667,7 +676,7 @@
                         die('Unsupported File!'); 
                 }
             }
-            $UploadDirectory    = substr(getcwd(),0, strlen(getcwd())-3).'/templates/temp/';
+            $UploadDirectory    = substr(getcwd(),0, strlen(getcwd())-3).'templates/temp/';
             $File_Ext           = substr($_FILES['FileInput']['type'], strrpos($_FILES['FileInput']['type'], '/')+1); //get file extention
             $Random_Number      = rand(0, 9999999999); //Random number to be added to name.
             $NewFileName        = $File_Name.$Random_Number.".".$File_Ext; //new file name
@@ -727,6 +736,125 @@
                 else return 0;
             }
             else return 0;
+        }
+        public function delTemplate($idToDelete){
+            $sessionNumber=filter_input(INPUT_COOKIE, 'squick_cmsSession', FILTER_SANITIZE_MAGIC_QUOTES);
+            $id=$this->selectUserIDBySession($sessionNumber);
+            if($this->checkDelete($id, "Templates")){
+                if(!($this->templatesAmount()==1)){
+                    $get_template=mysqli_fetch_array(mysqli_query($this->res, "SELECT * FROM Templates WHERE ID='".$idToDelete."';"));
+                    if($get_template["At_Use"]!=1){
+                        $query="DELETE FROM Templates WHERE ID='".$idToDelete."';";
+                        $this->begin();
+                        $del_temp=mysqli_query($this->res, $query);
+                        if(!$del_temp){
+                            $this->rollback();
+                            return 0;
+                        }
+                        else{
+                            $this->commit();
+                            @array_walk(glob($get_template["Path"]."/*"), function($fn){
+                                if(is_file($fn)) unlink($fn);
+                            });
+                            rmdir($get_template["Path"]);
+                            return 1;
+                        }
+                    }
+                    else{
+                        return 0;
+                    }
+                }
+                else{
+                    return 0;
+                }
+            }
+            else{
+                return 0;
+            }
+        }
+        public function setUseTemplate($idUse){
+            $sessionNumber=filter_input(INPUT_COOKIE, 'squick_cmsSession', FILTER_SANITIZE_MAGIC_QUOTES);
+            $id=$this->selectUserIDBySession($sessionNumber);
+            if($this->checkEdit($id, "Templates")){
+                $query="UPDATE Templates SET At_Use='0';";
+                $set_query="UPDATE Templates SET At_Use='1' WHERE ID='".$idUse."';";
+                $this->begin();
+                $reuse=mysqli_query($this->res, $query);
+                $use_temp=mysqli_query($this->res, $set_query);
+                if(!$reuse || $user_temp){
+                    $this->rollback();
+                    return 0;
+                }
+                else{
+                    $this->commit();
+                    return 1;
+                }
+            }
+            else{
+                return 0;
+            }
+        }
+        
+        //Zapytania - COMPONENTS
+        public function addComponent($templateID, $name, $component, $parameters){
+            $sessionNumber=filter_input(INPUT_COOKIE, 'squick_cmsSession', FILTER_SANITIZE_MAGIC_QUOTES);
+            $id=$this->selectUserIDBySession($sessionNumber);
+            if($this->checkEdit($id, "Templates")){
+                $query="INSERT INTO Components SET Name='".$name."', Component_File='".$component."', Parameters='".$parameters."', ID_Template='".$templateID."';";
+                $this->begin();
+                $add_component=mysqli_query($this->res, $query);
+                if(!$add_component){
+                    $this->rollback();
+                    return 0;
+                }
+                else{
+                    $this->commit();
+                    return 1;
+                }
+            }
+            else{
+                return 0;
+            }
+        }
+        public function delComponent($idToDelete){
+            $sessionNumber=filter_input(INPUT_COOKIE, 'squick_cmsSession', FILTER_SANITIZE_MAGIC_QUOTES);
+            $id=$this->selectUserIDBySession($sessionNumber);
+            if($this->checkEdit($id, "Templates")){
+                $query="DELETE FROM Components WHERE ID='".$idToDelete."';";
+                $this->begin();
+                $del_component=mysqli_query($this->res, $query);
+                if(!$del_component){
+                    $this->rollback();
+                    return 0;
+                }
+                else{
+                    $this->commit();
+                    return 1;
+                }
+            }
+            else{
+                return 0;
+            }
+        }
+        public function AddComponentToArea($areaID, $componentID){
+            $sessionNumber=filter_input(INPUT_COOKIE, 'squick_cmsSession', FILTER_SANITIZE_MAGIC_QUOTES);
+            $id=$this->selectUserIDBySession($sessionNumber);
+            if($this->checkEdit($id, "Templates")){
+                $query="UPDATE Predefined_Areas SET ID_Component='".$componentID."' WHERE ID='".$areaID."';";
+                $this->begin();
+                $add_component=mysqli_query($this->res, $query);
+                if(!$add_component){
+                    $this->rollback();
+                    return 0;
+                }
+                else{
+                    $this->commit();
+                    return 1;
+                }
+            }
+            else{
+                return 0;
+            }
         }
     }
     $connector=new mysqlConnector();

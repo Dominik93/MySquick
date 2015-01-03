@@ -2,7 +2,7 @@
     $areas_table=["header1", "link1", "link2", "link3", "link4", "content", "sidebar2", "footer"];
     echo '<link href="./templates/general_template.css" rel="stylesheet" type="text/css"/>';
 ?>
-<link href="<?php echo dirname($_SERVER['PHP_SELF'])."/style.css"; ?>" rel="stylesheet" type="text/css"/>
+<link href="<?php echo $_POST["path"]."/style.css"; ?>" rel="stylesheet" type="text/css"/>
 <header id="header1"></header>
 <nav>
     <div id="link1" class="link"></div>

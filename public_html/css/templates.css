@@ -1,4 +1,4 @@
-#template_layer{
+#templates_layer{
     position: absolute;
     display: none;
     top:-10px;
@@ -30,4 +30,120 @@ progress{
     margin-left: 210px;
     margin-top: 3px;
     display: block;
+}#templates_table{
+    margin: 10px 0px 30px 20px;
+}
+#t_components, #t_areas{
+    margin: auto;
+    border: 1px dashed cornflowerblue;
+}
+#t_templates th{
+    background-color: #555555;   
+    color: #ffffff;
+    padding: 3px;
+    text-align: center;
+    vertical-align: top;
+    font-family: Verdana;
+    font-size: 12px;
+}
+#t_templates th:not(:first-child){
+    border-left: 1px dashed whitesmoke; 
+}
+#t_templates tr:nth-child(2n), #t_components tr:nth-child(2n), #t_areas tr:nth-child(2n){
+    background-color: #ffffff;
+}
+#t_templates td, #t_components td, #t_areas td{
+    padding: 7px 5px;
+    font-size: 14px;
+    width: 100px;
+    vertical-align: top;
+    border-collapse: collapse !important;
+}
+#t_templates .id, #t_components .id, #t_areas .id{
+    display: none;
+}
+#t_templates .name, #t_components .name, #t_areas .name{
+    width: 300px;
+}
+#t_templates .set_templates_button{
+    width: 20px;
+    vertical-align: middle;
+}
+.edit_templates_button, .delete_templates_button, .delete_component_button{
+    width: 30px !important;
+    background-position: center center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+.edit_templates_button{
+    background-image: url('../img/icons/edit.png');
+}
+.delete_templates_button, .delete_component_button{
+    background-image: url('../img/icons/delete.png');
+}
+.edit_templates_button:hover, .delete_templates_button:hover, .delete_component_button:hover{
+    box-shadow: inset 0 80px rgba(0, 0, 0, 0.2);
+    transition: all 0.5s linear;
+}
+.template_edition_column{
+    float: left;
+    margin-top: 50px;
+    margin-left: 20px;
+}
+#component_name{
+    width: 200px;
+}
+#choose_component{
+    margin-top: 41px; 
+    margin-left: -200px;
+}
+#choose_parameters{
+    margin-left: 210px;
+    margin-top: -60px;
+    min-width: 210px;
+    width: 210px;
+}
+.multi{
+    height:60px;
+}
+#add_component_form{
+    background: whitesmoke;
+    padding: 10px;
+    height: 100px;
+    width: 421px;
+}
+.add_component_button{
+    margin-top: 10px;
+    border: none;
+    background: cornflowerblue;
+    cursor: pointer;
+    color: white;
+    padding: 3px;
+    font-weight: bold;
+    width: 421px;
+}
+#component_table{
+    background: whitesmoke;
+    width: 350px;
+    margin-top: 20px;
+    padding: 10px;
+}
+#close{
+    width: 100%;
+    height: 20px;
+    position: fixed;
+    margin: 10px auto !important;
+    text-align: center;
+    padding-top: 10px;
+    background: cornflowerblue;
+    cursor: pointer;
+    color: white;
+    padding: 3px;
+    font-weight: bold;
+}
+#template_areas{
+    width: 200px;
+    min-height: 80px;
+    background: whitesmoke;
+    padding: 10px;
 }

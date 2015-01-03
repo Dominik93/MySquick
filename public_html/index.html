@@ -26,6 +26,13 @@
         <script src="js/sendDeleteGallery.js" type="text/javascript"></script>
         <script src="js/editGallery.js" type="text/javascript"></script>
         <script src="js/sendTemplateInfo.js" type="text/javascript"></script>
+        <script src="js/sendDeleteTemplate.js" type="text/javascript"></script>
+        <script src="js/changeUsedTemplate.js" type="text/javascript"></script>
+        <script src="js/editTemplate.js" type="text/javascript"></script>
+        <script src="js/changeComponent.js" type="text/javascript"></script>
+        <script src="js/sendComponentInfo.js" type="text/javascript"></script>
+        <script src="js/sendDeleteComponent.js" type="text/javascript"></script>
+        <script src="js/sendAreaInfo.js" type="text/javascript"></script>
         <script src="js/libs/ckeditor/ckeditor.js" type="text/javascript"></script>
         <script src="js/libs/jquery.form.min.js" type="text/javascript"></script>
         <script>
@@ -40,7 +47,10 @@
         <div id="container"></div>
         <script>
             if(window.location.hash==="#admin") $("#container").load('./login.html');
-            else if($.cookie('squick_cmsSession')) $("#container").load('./cms_mainscreen.html');
+            else if($.cookie('squick_cmsSession')){
+                if(window.location.hash==="#look_at") $("#container").load('./php/GetTemplateInfo.php');
+                else $("#container").load('./cms_mainscreen.html');
+            }
             else $("#container").load('./php/GetTemplateInfo.php');
         </script>
     </body>

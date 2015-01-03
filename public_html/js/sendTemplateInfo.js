@@ -1,4 +1,4 @@
-function beforeSubmit(){
+function beforeTemplateSubmit(){
     if (window.File && window.FileReader && window.FileList && window.Blob){
         var fsize = $('#FileInput')[0].files[0].size;
         var ftype = $('#FileInput')[0].files[0].type;
@@ -20,21 +20,20 @@ function beforeSubmit(){
     }
 }
 
-function OnProgress(event, position, total, percentComplete)
+function OnTemplateProgress(event, position, total, percentComplete)
 {
     $('progress').css("display", "block");
     $('progress').attr("value", percentComplete);
 }
-function afterSuccess(){
+function afterTemplateSuccess(){
     alert('Wysłano');
-    $('progress').attr("value", "0");
 }
 function stopSubmitTemplate(){
     var options = {
         target:   '#progress',   
-        beforeSubmit:  beforeSubmit, 
-        success:       afterSuccess, 
-        uploadProgress: OnProgress, 
+        beforeSubmit:  beforeTemplateSubmit, 
+        success:       afterTemplateSuccess, 
+        uploadProgress: OnTemplateProgress, 
         resetForm: true        
     }; 
     $('#upload_template_form').submit(function() {
@@ -45,7 +44,10 @@ function stopSubmitTemplate(){
             alert("Wszystkie pola muszą być wypełnione"); 
             return false;
         }
-        $(this).ajaxSubmit(options);           
+        $.when($(this).ajaxSubmit(options)).then(function(){
+            $('progress').attr("value", "0");
+            $("#templates_table").load("./php/TemplateTable.php");   
+        });        
         return false;
     });
 }
