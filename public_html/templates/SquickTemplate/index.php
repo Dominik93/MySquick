@@ -1,6 +1,3 @@
-<?php
-    $element_table=["header1", "link1", "link2", "link3", "link4", "content", "sidebar2", "footer"];
-?>
 <link href="<?php echo dirname(__FILE__)."/style.css"; ?>" rel="stylesheet" type="text/css"/>
 <header id="header1"></header>
 <nav>
@@ -11,4 +8,4 @@
 </nav>
 <article id="content"></article>
 <div id="sidebar2"></div>
-<footer></footer>
+<footer id="footer"></footer>
